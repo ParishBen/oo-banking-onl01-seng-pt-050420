@@ -10,6 +10,7 @@ class Transfer
     
   end
   def valid?
+<<<<<<< HEAD
    sender.valid? && receiver.valid?
    end
   
@@ -34,4 +35,25 @@ class Transfer
       "Transaction rejected. Please check your account balance."
     end
   end
+=======
+    sender = BankAccount.all.find {|sender| sender == @sender}
+    receiver = BankAccount.all.find {|receiver| receiver == @receiver}
+    sender.valid? && receiver.valid? ? true : false
+   end
+  def execute_transaction
+     sender = BankAccount.all.find {|sender| sender == @sender}
+    receiver = BankAccount.all.find {|receiver| receiver == @receiver}
+    if !sender.valid?
+       "Transaction rejected. Please check your account balance"
+      self.status = "rejected"
+    end
+    if @amount> sender.balance
+      
+      sender.balance -= @amount
+      receiver.balance += @amount
+     self.status = "complete"
+   end
+ 
+  
+>>>>>>> 3fa1b10d2cc26f631c09e80ef5914478e6806a17
 end
